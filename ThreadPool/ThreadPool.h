@@ -7,7 +7,8 @@ public:
     ThreadPool(){}
     ~ThreadPool(){}
 
-    void start(int thread_num, const std::function<void>& callback);
+    void start(int thread_num);
+    void add_task(std::function<void> callback);
 private:
-    std::vector<std::thread> thread_vec_;
+    std::vector<std::thread*> thread_vec_;
 }
