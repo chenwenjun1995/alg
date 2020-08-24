@@ -24,7 +24,7 @@ void quick_sort(std::vector<int> &sort_vec, int start, int end)
 }
 
 
-// 归并排序
+// 归并排序1
 std::vector<int> merge(std::vector<int> left, std::vector<int> right)
 {
     std::vector<int> tmp;
@@ -55,10 +55,41 @@ std::vector<int> merge_sort(std::vector<int> &sort_vec)
     return merge(merge_sort(left), merge_sort(right));
 }
 
+// 归并排序2
+void merge(std::vector<int> &sort_vec, int left_s, int left_e, int right_s, int right_e)
+{
+    int l = left_s, r = right_s;
+    std::vector<int> tmp; // 这里需要一个临时数组保存这次排序好的部分元素
+    while (l <= left_e && r <= right_e) {
+        if (sort_vec[l] <= sort_vec[r]) {
+            tmp.push_back(sort_vec[l++]);
+        }
+        else {
+            tmp.push_back(sort_vec[r++]);
+        }
+    }
+    while (l <= left_e) tmp.push_back(sort_vec[l++]);
+    while (r < right_e) tmp.push_back(sort_vec[r++]);
+    // 排序好后再把数据复制会原数组
+    for (int i = 0; i < tmp.size(); i++) {
+        sort_vec[left_s + i] = tmp[i];
+    }
+    return;
+}
+
+void merge_sort(std::vector<int> &sort_vec, int start, int end)
+{
+    if (start >= end) return;
+    int mid = (start + end) / 2;
+    merge_sort(sort_vec, start, mid); // 归并排序左半部分
+    merge_sort(sort_vec, mid + 1, end); // 归并排序右半部分
+    merge(sort_vec, start, mid, mid + 1, end); // 合并
+}
+
 int main()
 {
     std::vector<int> sort_vec = {3,2,3,5,6,9,2,6,3,2,23,43,64,21,4};
-    sort_vec = merge_sort(sort_vec);
+    merge_sort(sort_vec, 0 , sort_vec.size() - 1);
     for (auto iter : sort_vec) {
         std::cout << iter << " ";
     }

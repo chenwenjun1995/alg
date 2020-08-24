@@ -1,6 +1,7 @@
 # alg
-why is alg
-you can call it aoligei or algorithem.
+what is alg?
+you can call it algorithem or aoligei.
+
 练习一些常见编程组件
 
 计划：
