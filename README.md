@@ -1,4 +1,6 @@
-# aoligei
+# alg
+why is alg
+you can call it aoligei or algorithem.
 练习一些常见编程组件
 
 计划：
